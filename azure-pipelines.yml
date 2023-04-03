@@ -1,14 +1,14 @@
 resources:
   containers:
   - container: builder
-    image: ubuntu:18.04
+    image: nginx:latest
 steps:
 - script: echo "I can run inside the container (it starts by default)"
   target:
-    container: builder
+    container: mynginx
 - task: Docker@2
   inputs:
     command: stop
-    container: builder
+    container: mynginx
 # any task beyond this point would not be able to target the builder container
 # because it's been stopped
