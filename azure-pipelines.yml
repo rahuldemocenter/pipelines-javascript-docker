@@ -3,6 +3,9 @@ resources:
   - container: mynginx
     image: nginx:latest
 steps:
+- script: echo "I can run inside the container (it starts by default)"
+  target:
+    container: mynginx
 - task: Docker@2
   inputs:
     command: stop
