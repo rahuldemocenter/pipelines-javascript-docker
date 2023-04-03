@@ -1,20 +1,11 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- main
-
-pool:
-  vmImage: ubuntu-latest
-
-variables:
-   imageName: 'pipelines-javascript-docker'
+resources:
+  containers:
+  - container: mynginx
+    image: nginx:latest
 steps:
 - task: Docker@2
-  displayName: 'Build an image'
   inputs:
-     repository: $(imageName)
-     command: build
-     Dockerfile: app/Dockerfile
+    command: stop
+    container: mynginx
+# any task beyond this point would not be able to target the mynginx container
+# because it's been stopped
